@@ -1,6 +1,6 @@
 create table if not exists Genre (
 	id SERIAL primary key,
-	title VARCHAR(60) not NULL
+	title VARCHAR(60) unique not NULL
 );
 
 create table if not exists Musician (
@@ -28,9 +28,11 @@ create table if not exists MusicianAlbum (
 );
 
 create table if not exists Track (
-	id integer primary key references Album(id),
+	id SERIAL primary key,
 	name VARCHAR(30)not null,
-	year date not null
+	year date not null,
+	constraint fk_album foreign key (album_id) references Album(album_id)
+	
 );
 
 create table if not exists Collection (
