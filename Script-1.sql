@@ -1,11 +1,11 @@
 create table if not exists Genre (
-	id SERIAL primary key,
+	genre_id SERIAL primary key,
 	title VARCHAR(60) unique not NULL
 );
 
 create table if not exists Musician (
-	id SERIAL primary key,
-	nickname VARCHAR(30) not null
+	musician_id SERIAL primary key,
+	nickname VARCHAR(30) NOT NULL UNIQUE
 );
 
 create table if not exists GenreMusician (
@@ -15,30 +15,30 @@ create table if not exists GenreMusician (
 );
 
 create table if not exists Album (
-	id SERIAL primary key,
+	album_id SERIAL primary key,
 	title VARCHAR(30) not null,
-	year date not null
+	year integer not NULL CHECK (YEAR > 1900 AND YEAR < 2024)
 );
 
 
 create table if not exists MusicianAlbum (
 	musician_id INTEGER references Musician(id),
 	album_id INTEGER references Album(id),
-	constraint pk primary key (musician_id, album_id)
+	constraint pf primary key (musician_id, album_id)
 );
 
 create table if not exists Track (
-	id SERIAL primary key,
+	track_id SERIAL primary key,
 	name VARCHAR(30)not null,
-	year date not null,
+	duration time not null,
 	constraint fk_album foreign key (album_id) references Album(album_id)
 	
 );
 
 create table if not exists Collection (
-	id SERIAL primary key,
+	collection_id SERIAL primary key,
 	title VARCHAR(30) not null,
-	year date not null
+	year integer not NULL CHECK (YEAR > 1900 AND YEAR < 2024)
 );
 
 create table if not exists TrackCollection (
