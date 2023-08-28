@@ -18,4 +18,15 @@ WHERE NOT nickname LIKE '%% %%'
 
 SELECT name 
 FROM track
-WHERE name LIKE '%%my%%' OR name LIKE '%%мой%%'
+WHERE name ILIKE 'My %' 
+OR name ILIKE '% my %'
+OR name ILIKE 'My'
+OR name ILIKE '% my'
+OR name ILIKE 'Мой'
+OR name ILIKE 'Мой %'
+OR name ILIKE '% мой %'
+OR name ILIKE '% мой'
+
+SELECT name
+FROM track
+WHERE string_to_array(lower(name), ' ') && ARRAY['My', 'my', 'Мой', 'мой'] 

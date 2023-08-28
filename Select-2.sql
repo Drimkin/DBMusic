@@ -8,7 +8,7 @@ ORDER BY count(m.musician_id) DESC
 SELECT t.name, a.year
 FROM album a
 LEFT JOIN track t ON t.album_id = a.album_id
-WHERE (a.year >= 2019) AND (a.year <= 2021)
+WHERE (a.year >= 2019) AND (a.year <= 2020)
 
 SELECT a.title, avg(t.duration)
 FROM album a
